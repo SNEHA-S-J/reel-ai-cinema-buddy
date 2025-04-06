@@ -37,8 +37,11 @@ export const getRecommendations = (
     return { ...movie, score };
   });
   
+  // Filter out movies below minimum rating before sorting
+  const filteredMovies = scoredMovies.filter(movie => movie.vote_average >= preferences.minimumRating);
+  
   // Sort movies by score in descending order
-  const sortedMovies = scoredMovies.sort((a, b) => b.score - a.score);
+  const sortedMovies = filteredMovies.sort((a, b) => b.score - a.score);
   
   // Return the top N movies
   return sortedMovies.slice(0, limit).map(({ score, ...movie }) => movie);

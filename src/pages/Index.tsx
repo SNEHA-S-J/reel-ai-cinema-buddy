@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import MovieCard from "@/components/MovieCard";
 import MovieDetails from "@/components/MovieDetails";
 import GenreSelector from "@/components/GenreSelector";
+import MinimumRatingSelector from "@/components/MinimumRatingSelector";
 import { Movie, MovieGenre, UserPreference } from "@/types/movies";
 import { MOVIES } from "@/data/movies";
 import { getRecommendations, searchMovies, filterByGenre } from "@/utils/recommendationEngine";
@@ -29,6 +30,7 @@ const Index = () => {
   const [selectedGenre, setSelectedGenre] = useState<MovieGenre | null>(null);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   const [activeTab, setActiveTab] = useState("discover");
+  const [showPreferences, setShowPreferences] = useState(false);
   
   // Derived state
   const [recommendations, setRecommendations] = useState<Movie[]>([]);
@@ -70,6 +72,14 @@ const Index = () => {
         description: `Found ${results.length} movies matching "${searchQuery}".`,
       });
     }
+  };
+  
+  // Handle minimum rating change
+  const handleMinimumRatingChange = (value: number) => {
+    setPreferences({
+      ...preferences,
+      minimumRating: value
+    });
   };
   
   // Handle movie rating
@@ -167,7 +177,46 @@ const Index = () => {
           </TabsList>
           
           <TabsContent value="discover" className="animate-fade-in">
-            <h2 className="text-2xl font-bold mb-6 text-cinema-accent">Recommended For You</h2>
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+              <h2 className="text-2xl font-bold text-cinema-accent mb-4 md:mb-0">Recommended For You</h2>
+              <Button 
+                variant="outline" 
+                className="bg-cinema-blue border-cinema-purple text-cinema-text hover:bg-cinema-purple/20"
+                onClick={() => setShowPreferences(!showPreferences)}
+              >
+                {showPreferences ? "Hide Preferences" : "Show Preferences"}
+              </Button>
+            </div>
+            
+            {showPreferences && (
+              <div className="mb-6 p-4 bg-cinema-blue border border-cinema-purple rounded-lg">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <h3 className="text-lg font-medium mb-4 text-cinema-accent">Favorite Genres</h3>
+                    <GenreSelector 
+                      value={selectedGenre} 
+                      onChange={(genre) => {
+                        setSelectedGenre(genre);
+                        if (genre && !preferences.favoriteGenres.includes(genre)) {
+                          setPreferences({
+                            ...preferences,
+                            favoriteGenres: [...preferences.favoriteGenres, genre]
+                          });
+                        }
+                      }} 
+                    />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-medium mb-4 text-cinema-accent">Quality Filter</h3>
+                    <MinimumRatingSelector 
+                      value={preferences.minimumRating} 
+                      onChange={handleMinimumRatingChange} 
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+            
             {recommendations.length > 0 ? (
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
                 {recommendations.map((movie) => (
