@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Film, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -13,43 +12,38 @@ import { MOVIES } from "@/data/movies";
 import { getRecommendations, searchMovies, filterByGenre } from "@/utils/recommendationEngine";
 import { useToast } from "@/hooks/use-toast";
 import { useIsMobile } from "@/hooks/use-mobile";
+import BotpressChat from "@/components/BotpressChat";
 
 const Index = () => {
   const { toast } = useToast();
   const isMobile = useIsMobile();
   
-  // User preferences state
   const [preferences, setPreferences] = useState<UserPreference>({
     favoriteGenres: ["Action", "Drama", "Science Fiction"],
     ratedMovies: {},
     minimumRating: 7.0
   });
   
-  // UI state
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedGenre, setSelectedGenre] = useState<MovieGenre | null>(null);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   const [activeTab, setActiveTab] = useState("discover");
   const [showPreferences, setShowPreferences] = useState(false);
   
-  // Derived state
   const [recommendations, setRecommendations] = useState<Movie[]>([]);
   const [filteredMovies, setFilteredMovies] = useState<Movie[]>([]);
   const [searchResults, setSearchResults] = useState<Movie[]>([]);
 
-  // Update recommendations when preferences change
   useEffect(() => {
     const newRecommendations = getRecommendations(preferences, MOVIES, 6);
     setRecommendations(newRecommendations);
   }, [preferences]);
 
-  // Update filtered movies when genre changes
   useEffect(() => {
     const filtered = filterByGenre(selectedGenre, MOVIES);
     setFilteredMovies(filtered);
   }, [selectedGenre]);
 
-  // Handle search
   const handleSearch = () => {
     if (searchQuery.trim() === "") {
       setSearchResults([]);
@@ -74,7 +68,6 @@ const Index = () => {
     }
   };
   
-  // Handle minimum rating change
   const handleMinimumRatingChange = (value: number) => {
     setPreferences({
       ...preferences,
@@ -82,7 +75,6 @@ const Index = () => {
     });
   };
   
-  // Handle movie rating
   const handleRateMovie = (movieId: number, rating: number) => {
     const updatedRatedMovies = { ...preferences.ratedMovies, [movieId]: rating };
     
@@ -101,7 +93,6 @@ const Index = () => {
     }
   };
   
-  // Active list based on tab
   const activeMovieList = () => {
     switch (activeTab) {
       case "search":
@@ -116,7 +107,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-cinema-dark text-cinema-text">
-      {/* Header */}
       <header className="bg-cinema-blue border-b border-cinema-purple p-4 md:p-6">
         <div className="container mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
@@ -151,7 +141,6 @@ const Index = () => {
         </div>
       </header>
 
-      {/* Main Content */}
       <main className="container mx-auto p-4 md:p-6">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid grid-cols-3 mb-6 bg-cinema-blue">
@@ -279,14 +268,12 @@ const Index = () => {
         </Tabs>
       </main>
       
-      {/* Footer */}
       <footer className="bg-cinema-blue border-t border-cinema-purple p-4 text-center mt-10">
         <p className="text-sm text-cinema-text/70">
           Reel-AI Cinema Buddy © {new Date().getFullYear()}
         </p>
       </footer>
       
-      {/* Movie Details Modal */}
       <MovieDetails
         movie={selectedMovie}
         open={!!selectedMovie}
@@ -294,6 +281,8 @@ const Index = () => {
         onRateMovie={handleRateMovie}
         userRating={selectedMovie ? preferences.ratedMovies[selectedMovie.id] : undefined}
       />
+
+      <BotpressChat />
     </div>
   );
 };
