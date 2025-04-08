@@ -1,7 +1,7 @@
 
 import { Movie } from "@/types/movies";
 import { Card, CardContent } from "@/components/ui/card";
-import { Star, ThumbsUp } from "lucide-react";
+import { Star, ThumbsUp, Heart, Bookmark, Share2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 
@@ -21,6 +21,7 @@ const MovieCard = ({
   onClick 
 }: MovieCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
   
   // Default placeholder image if poster_path is not valid
   const posterUrl = movie.poster_path.startsWith('/') 
@@ -30,15 +31,15 @@ const MovieCard = ({
   return (
     <Card 
       className={cn(
-        "relative overflow-hidden transition-all duration-300 bg-cinema-blue border-cinema-purple",
-        isHovered ? "scale-105 shadow-lg shadow-cinema-purple/30" : "",
+        "relative overflow-hidden transition-all duration-300 bg-cinema-blue border-none rounded-xl shadow-md",
+        isHovered ? "shadow-xl shadow-cinema-purple/20" : "",
         className
       )}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={onClick}
     >
-      <div className="relative aspect-[2/3] overflow-hidden">
+      <div className="relative aspect-auto overflow-hidden">
         <img 
           src={posterUrl} 
           alt={movie.title}
@@ -50,42 +51,57 @@ const MovieCard = ({
         />
         
         <div className={cn(
-          "absolute inset-0 bg-gradient-to-t from-black/90 to-transparent p-4 flex flex-col justify-end transition-opacity",
-          isHovered ? "opacity-100" : "opacity-0 sm:opacity-100"
+          "absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-4 flex flex-col justify-end",
+          isHovered ? "opacity-100" : "opacity-0 sm:opacity-0"
         )}>
-          <h3 className="text-cinema-text font-bold text-lg line-clamp-2">{movie.title}</h3>
+          <div className="absolute top-2 right-2 flex gap-2">
+            <div className="bg-black/60 p-2 rounded-full hover:bg-cinema-purple/80 cursor-pointer transition-colors">
+              <Heart 
+                className={cn("h-5 w-5", isSaved ? "text-red-500 fill-red-500" : "text-white")} 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsSaved(!isSaved);
+                }}
+              />
+            </div>
+            <div className="bg-black/60 p-2 rounded-full hover:bg-cinema-purple/80 cursor-pointer transition-colors">
+              <Share2 className="h-5 w-5 text-white" onClick={(e) => e.stopPropagation()} />
+            </div>
+          </div>
+          
+          <h3 className="text-cinema-text font-bold text-lg">{movie.title}</h3>
           <p className="text-cinema-text/80 text-sm">{new Date(movie.release_date).getFullYear()}</p>
           
-          <div className="flex items-center mt-1">
+          <div className="flex items-center mt-2">
             <Star className="h-4 w-4 text-cinema-accent" fill="currentColor" />
             <span className="text-cinema-text ml-1 text-sm">{movie.vote_average.toFixed(1)}</span>
           </div>
-        </div>
-      </div>
-      
-      {onRateMovie && (
-        <CardContent className="p-3 bg-cinema-blue">
-          <div className="flex justify-between items-center">
-            <span className="text-sm text-cinema-text">Your Rating:</span>
-            <div className="flex">
+          
+          {onRateMovie && (
+            <div className="flex mt-3 gap-1">
               {[1, 2, 3, 4, 5].map((rating) => (
                 <ThumbsUp
                   key={rating}
                   className={cn(
-                    "h-5 w-5 mx-0.5 cursor-pointer transition-all",
-                    rating <= (userRating || 0) ? "text-cinema-accent" : "text-gray-500"
+                    "h-5 w-5 cursor-pointer transition-all",
+                    rating <= (userRating || 0) 
+                      ? "text-cinema-accent fill-cinema-accent" 
+                      : "text-gray-400/80"
                   )}
                   onClick={(e) => {
                     e.stopPropagation();
                     onRateMovie(movie.id, rating === userRating ? 0 : rating);
                   }}
-                  fill={rating <= (userRating || 0) ? "currentColor" : "none"}
                 />
               ))}
             </div>
-          </div>
-        </CardContent>
-      )}
+          )}
+        </div>
+      </div>
+      
+      <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/80 to-transparent opacity-0 sm:opacity-100">
+        <p className="text-white text-xs truncate">{movie.title} ({new Date(movie.release_date).getFullYear()})</p>
+      </div>
     </Card>
   );
 };
