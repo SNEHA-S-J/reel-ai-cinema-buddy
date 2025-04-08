@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Film, Search, Compass, Heart, Clock, Tag } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -14,6 +13,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useIsMobile } from "@/hooks/use-mobile";
 import BotpressChat from "@/components/BotpressChat";
 import MasonryGrid from "@/components/MasonryGrid";
+import { cn } from "@/lib/utils";
 
 const Index = () => {
   const { toast } = useToast();
@@ -47,7 +47,6 @@ const Index = () => {
   }, [selectedGenre]);
 
   useEffect(() => {
-    // Close sidebar on mobile
     if (isMobile) {
       setSidebarOpen(false);
     } else {
@@ -120,7 +119,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-cinema-dark text-cinema-text">
-      {/* Header/Navigation */}
       <header className="sticky top-0 z-10 bg-cinema-blue/95 backdrop-blur-sm border-b border-cinema-purple/50 p-4">
         <div className="container mx-auto">
           <div className="flex items-center justify-between gap-4">
@@ -167,12 +165,10 @@ const Index = () => {
       </header>
 
       <div className="flex min-h-[calc(100vh-72px)]">
-        {/* Sidebar Navigation */}
         <aside className={cn(
           "bg-cinema-blue border-r border-cinema-purple/50 transition-all duration-300 flex flex-col",
           sidebarOpen ? "w-64" : isMobile ? "w-0 opacity-0" : "w-16"
         )}>
-          {/* Sidebar toggle button for mobile */}
           {isMobile && (
             <Button 
               className="absolute top-20 left-4 z-20 bg-cinema-purple text-white"
@@ -247,7 +243,6 @@ const Index = () => {
           )}
         </aside>
         
-        {/* Main Content Area */}
         <main className="flex-1 p-4 md:p-6 overflow-y-auto">
           {showPreferences && (
             <div className="mb-6 p-4 bg-cinema-blue border border-cinema-purple/50 rounded-lg animate-fade-in">
@@ -282,7 +277,6 @@ const Index = () => {
             </div>
           )}
           
-          {/* Tab title */}
           <div className="mb-6">
             <h2 className="text-2xl font-bold text-cinema-accent">
               {activeTab === "discover" && "Recommended For You"}
@@ -291,7 +285,6 @@ const Index = () => {
             </h2>
           </div>
           
-          {/* Movie Grid */}
           {activeMovieList().length > 0 ? (
             <MasonryGrid columnCount={columnCount}>
               {activeMovieList().map((movie) => (
@@ -332,4 +325,3 @@ const Index = () => {
 };
 
 export default Index;
-
