@@ -1,3 +1,4 @@
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -12,10 +13,10 @@
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em #ea384caa);
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2em #ea384caa);
 }
 
 @keyframes logo-spin {
@@ -35,8 +36,36 @@
 
 .card {
   padding: 2em;
+  border: 2px solid #ea384c;
+  border-radius: 0.25rem;
 }
 
 .read-the-docs {
-  color: #888;
+  color: #ea384c;
+}
+
+/* Retro design elements */
+.retro-stripe {
+  background: repeating-linear-gradient(
+    45deg,
+    #ea384c,
+    #ea384c 10px,
+    #ffffff 10px,
+    #ffffff 20px
+  );
+  height: 8px;
+}
+
+.retro-shadow {
+  box-shadow: 5px 5px 0px #ea384c;
+}
+
+.retro-border {
+  border: 2px solid #ea384c;
+  border-radius: 0.25rem;
+}
+
+.retro-dot-pattern {
+  background-image: radial-gradient(#ea384c 1px, transparent 1px);
+  background-size: 10px 10px;
 }

@@ -22,54 +22,55 @@ const MovieDetails = ({ movie, open, onClose, onRateMovie, userRating }: MovieDe
 
   return (
     <Dialog open={open} onOpenChange={() => onClose()}>
-      <DialogContent className="max-w-4xl bg-cinema-blue text-cinema-text border-cinema-purple">
-        <DialogHeader>
-          <DialogTitle className="text-2xl text-cinema-accent flex items-center justify-between">
+      <DialogContent className="max-w-4xl bg-white text-retro-gray border-2 border-retro-red rounded-sm p-0 overflow-hidden">
+        <div className="retro-stripe w-full"></div>
+        <DialogHeader className="p-6">
+          <DialogTitle className="text-2xl text-retro-red flex items-center justify-between font-mono uppercase tracking-wider">
             {movie.title}
             <Button 
               variant="ghost" 
               size="icon" 
               onClick={onClose}
-              className="text-cinema-text hover:text-cinema-accent"
+              className="text-retro-red hover:text-retro-darkred hover:bg-transparent"
             >
               <X className="h-5 w-5" />
             </Button>
           </DialogTitle>
         </DialogHeader>
 
-        <div className="grid md:grid-cols-2 gap-6 mt-4">
-          <div className="aspect-[2/3] relative overflow-hidden rounded-md">
+        <div className="grid md:grid-cols-2 gap-6 p-6 pt-0">
+          <div className="aspect-[2/3] relative overflow-hidden border-2 border-retro-red rounded-sm retro-shadow">
             <img 
               src={posterUrl} 
               alt={movie.title}
               className="w-full h-full object-cover"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
-                target.src = 'https://placehold.co/300x450/121212/e9b649?text=No+Image';
+                target.src = 'https://placehold.co/300x450/ffffff/ea384c?text=No+Image';
               }}
             />
           </div>
 
           <div className="flex flex-col">
             <div className="flex items-center mb-4">
-              <Star className="h-5 w-5 text-cinema-accent" fill="currentColor" />
-              <span className="ml-2">{movie.vote_average.toFixed(1)} / 10</span>
-              <span className="ml-4 text-cinema-text/70">{new Date(movie.release_date).toLocaleDateString()}</span>
+              <Star className="h-5 w-5 text-retro-red" fill="currentColor" />
+              <span className="ml-2 font-mono">{movie.vote_average.toFixed(1)} / 10</span>
+              <span className="ml-4 text-retro-gray/70 font-mono">{new Date(movie.release_date).toLocaleDateString()}</span>
             </div>
 
             <div className="flex flex-wrap gap-2 mb-4">
               {movie.genres.map((genre) => (
-                <Badge key={genre} className="bg-cinema-purple text-cinema-text hover:bg-cinema-purple/80">
+                <Badge key={genre} className="bg-retro-red text-white hover:bg-retro-darkred border-0 rounded-sm uppercase tracking-wider font-mono">
                   {genre}
                 </Badge>
               ))}
             </div>
 
-            <p className="text-cinema-text/90 mb-6">{movie.overview}</p>
+            <p className="text-retro-gray mb-6 font-mono">{movie.overview}</p>
 
             {onRateMovie && (
               <div className="mt-auto">
-                <p className="text-sm mb-2">Rate this movie:</p>
+                <p className="text-sm mb-2 font-mono uppercase tracking-wider">Rate this movie:</p>
                 <div className="flex gap-2">
                   {[1, 2, 3, 4, 5].map((rating) => (
                     <Button 
@@ -77,8 +78,8 @@ const MovieDetails = ({ movie, open, onClose, onRateMovie, userRating }: MovieDe
                       variant={rating <= (userRating || 0) ? "default" : "outline"}
                       className={
                         rating <= (userRating || 0)
-                          ? "bg-cinema-accent text-cinema-blue hover:bg-cinema-accent/90" 
-                          : "border-cinema-accent text-cinema-accent hover:bg-cinema-purple/20"
+                          ? "bg-retro-red text-white hover:bg-retro-darkred rounded-sm border-2 border-retro-darkred font-mono uppercase" 
+                          : "border-retro-red text-retro-red hover:bg-retro-lightred/20 rounded-sm border-2 font-mono uppercase"
                       }
                       onClick={() => onRateMovie(movie.id, rating === userRating ? 0 : rating)}
                     >

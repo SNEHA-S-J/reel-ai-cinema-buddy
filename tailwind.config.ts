@@ -64,11 +64,20 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				cinema: {
-					dark: '#121212',
-					blue: '#1a1d29',
-					purple: '#2d1b69',
-					accent: '#e9b649',
-					text: '#f5f5f7'
+					dark: '#ffffff', // Changed to white
+					blue: '#ffffff', // Changed to white
+					purple: '#ea384c', // Changed to red
+					accent: '#ea384c', // Changed to red
+					text: '#333333' // Changed to dark gray for readability
+				},
+				retro: {
+					white: '#ffffff',
+					cream: '#FFF5E4',
+					lightred: '#FFB3B3',
+					red: '#ea384c',
+					darkred: '#c01c30',
+					gray: '#333333',
+					lightgray: '#DDDDDD'
 				}
 			},
 			borderRadius: {

@@ -1,85 +1,48 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 0 0% 100%; /* White */
+    --foreground: 0 0% 20%; /* Dark gray for text */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%; /* White */
+    --card-foreground: 0 0% 20%; /* Dark gray for text */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%; /* White */
+    --popover-foreground: 0 0% 20%; /* Dark gray for text */
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 355 83% 57%; /* Red */
+    --primary-foreground: 0 0% 100%; /* White */
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 355 83% 95%; /* Light red */
+    --secondary-foreground: 355 83% 57%; /* Red */
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 0 0% 92%; /* Light gray */
+    --muted-foreground: 0 0% 45%; /* Gray */
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 355 83% 95%; /* Light red */
+    --accent-foreground: 355 83% 57%; /* Red */
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84.2% 60.2%; /* Red */
+    --destructive-foreground: 0 0% 100%; /* White */
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 0 0% 85%; /* Light gray */
+    --input: 0 0% 85%; /* Light gray */
+    --ring: 355 83% 57%; /* Red */
 
-    --radius: 0.5rem;
+    --radius: 0.25rem; /* Smaller radius for retro feel */
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 0 0% 100%; /* White */
+    --sidebar-foreground: 355 83% 57%; /* Red */
+    --sidebar-primary: 355 83% 57%; /* Red */
+    --sidebar-primary-foreground: 0 0% 100%; /* White */
+    --sidebar-accent: 355 83% 95%; /* Light red */
+    --sidebar-accent-foreground: 355 83% 57%; /* Red */
+    --sidebar-border: 355 83% 90%; /* Lighter red */
+    --sidebar-ring: 355 83% 57%; /* Red */
   }
 }
 
@@ -91,6 +54,7 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: 'Courier New', monospace; /* Added retro font */
   }
 
   ::-webkit-scrollbar {
@@ -99,55 +63,74 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: #1a1d29;
+    background: #ffffff;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #2d1b69;
-    border-radius: 4px;
+    background: #ea384c;
+    border-radius: 2px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #e9b649;
+    background: #c01c30;
   }
 }
 
 /* Botpress Chat Customization */
 .bp-widget-web {
-  --bp-font-family: inherit;
-  --bp-widget-background-color: #1a1d29;
-  --bp-widget-border-radius: 0.5rem;
-  --bp-widget-border-color: #2d1b69;
-  --bp-widget-primary-color: #9b87f5;
-  --bp-widget-secondary-color: #e9b649;
+  --bp-font-family: 'Courier New', monospace; /* Changed to retro font */
+  --bp-widget-background-color: #ffffff;
+  --bp-widget-border-radius: 0.25rem;
+  --bp-widget-border-color: #ea384c;
+  --bp-widget-primary-color: #ea384c;
+  --bp-widget-secondary-color: #333333;
   
   /* Chat bubbles */
-  --bp-chat-message-bot-background-color: #2d1b69;
-  --bp-chat-message-user-background-color: #3a2b7e;
-  --bp-chat-message-text-color: #f5f5f7;
+  --bp-chat-message-bot-background-color: #ea384c;
+  --bp-chat-message-user-background-color: #333333;
+  --bp-chat-message-text-color: #ffffff;
   
   /* Input box */
-  --bp-chat-composer-background-color: #1a1d29;
-  --bp-chat-composer-text-color: #f5f5f7;
-  --bp-chat-composer-border-color: #2d1b69;
+  --bp-chat-composer-background-color: #ffffff;
+  --bp-chat-composer-text-color: #333333;
+  --bp-chat-composer-border-color: #ea384c;
   
   /* Button colors */
-  --bp-button-primary-background-color: #9b87f5;
+  --bp-button-primary-background-color: #ea384c;
   --bp-button-primary-text-color: #fff;
-  --bp-button-secondary-background-color: #2d1b69;
-  --bp-button-secondary-text-color: #f5f5f7;
+  --bp-button-secondary-background-color: #333333;
+  --bp-button-secondary-text-color: #ffffff;
   
   /* Header */
-  --bp-header-background-color: #2d1b69;
-  --bp-header-text-color: #f5f5f7;
+  --bp-header-background-color: #ea384c;
+  --bp-header-text-color: #ffffff;
 }
 
 .bp-widget-widget {
   margin: 1rem !important;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3) !important;
 }
 
 /* Increase the z-index to make sure the chat is above other elements */
 #bp-web-widget-container {
   z-index: 9999 !important;
+}
+
+/* Retro-specific styles */
+@layer components {
+  .retro-container {
+    @apply border-2 border-retro-red rounded-sm shadow-md;
+  }
+  
+  .retro-button {
+    @apply bg-retro-red text-white border-2 border-retro-darkred rounded-sm font-bold uppercase tracking-wider hover:bg-retro-darkred transition-colors;
+  }
+  
+  .retro-card {
+    @apply bg-white border-2 border-retro-red rounded-sm shadow-md hover:shadow-lg transition-all;
+  }
+  
+  .retro-input {
+    @apply bg-white border-2 border-retro-gray rounded-sm focus:border-retro-red outline-none;
+  }
 }
