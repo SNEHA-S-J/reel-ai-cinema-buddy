@@ -5,44 +5,44 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%; /* White */
-    --foreground: 0 0% 20%; /* Dark gray for text */
+    --background: 60 30% 96%; /* Light vanilla background */
+    --foreground: 195 39% 25%; /* Dark slate gray text */
 
-    --card: 0 0% 100%; /* White */
-    --card-foreground: 0 0% 20%; /* Dark gray for text */
+    --card: 60 30% 96%; /* Light vanilla */
+    --card-foreground: 195 39% 25%; /* Dark slate gray text */
 
-    --popover: 0 0% 100%; /* White */
-    --popover-foreground: 0 0% 20%; /* Dark gray for text */
+    --popover: 60 30% 96%; /* Light vanilla */
+    --popover-foreground: 195 39% 25%; /* Dark slate gray text */
 
-    --primary: 355 83% 57%; /* Red */
-    --primary-foreground: 0 0% 100%; /* White */
+    --primary: 0 60% 40%; /* Auburn */
+    --primary-foreground: 60 30% 96%; /* Vanilla */
 
-    --secondary: 355 83% 95%; /* Light red */
-    --secondary-foreground: 355 83% 57%; /* Red */
+    --secondary: 43 89% 63%; /* Hunyadi yellow */
+    --secondary-foreground: 195 39% 25%; /* Dark slate gray */
 
-    --muted: 0 0% 92%; /* Light gray */
-    --muted-foreground: 0 0% 45%; /* Gray */
+    --muted: 195 10% 90%; /* Light gray */
+    --muted-foreground: 195 39% 40%; /* Muted slate gray */
 
-    --accent: 355 83% 95%; /* Light red */
-    --accent-foreground: 355 83% 57%; /* Red */
+    --accent: 43 89% 63%; /* Hunyadi yellow */
+    --accent-foreground: 195 39% 25%; /* Dark slate gray */
 
-    --destructive: 0 84.2% 60.2%; /* Red */
-    --destructive-foreground: 0 0% 100%; /* White */
+    --destructive: 0 60% 40%; /* Auburn */
+    --destructive-foreground: 60 30% 96%; /* Vanilla */
 
-    --border: 0 0% 85%; /* Light gray */
-    --input: 0 0% 85%; /* Light gray */
-    --ring: 355 83% 57%; /* Red */
+    --border: 195 20% 85%; /* Light gray border */
+    --input: 195 20% 85%; /* Light gray input */
+    --ring: 0 60% 40%; /* Auburn */
 
     --radius: 0.25rem; /* Smaller radius for retro feel */
 
-    --sidebar-background: 0 0% 100%; /* White */
-    --sidebar-foreground: 355 83% 57%; /* Red */
-    --sidebar-primary: 355 83% 57%; /* Red */
-    --sidebar-primary-foreground: 0 0% 100%; /* White */
-    --sidebar-accent: 355 83% 95%; /* Light red */
-    --sidebar-accent-foreground: 355 83% 57%; /* Red */
-    --sidebar-border: 355 83% 90%; /* Lighter red */
-    --sidebar-ring: 355 83% 57%; /* Red */
+    --sidebar-background: 195 39% 25%; /* Dark slate gray */
+    --sidebar-foreground: 60 30% 96%; /* Vanilla */
+    --sidebar-primary: 0 60% 40%; /* Auburn */
+    --sidebar-primary-foreground: 60 30% 96%; /* Vanilla */
+    --sidebar-accent: 43 89% 63%; /* Hunyadi yellow */
+    --sidebar-accent-foreground: 195 39% 25%; /* Dark slate gray */
+    --sidebar-border: 195 30% 30%; /* Darker slate gray */
+    --sidebar-ring: 0 60% 40%; /* Auburn */
   }
 }
 
@@ -52,9 +52,9 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-retro-white text-retro-gray;
     font-feature-settings: "rlig" 1, "calt" 1;
-    font-family: 'Courier New', monospace; /* Added retro font */
+    font-family: 'Courier New', monospace; /* Retro font */
   }
 
   ::-webkit-scrollbar {
@@ -63,47 +63,47 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: #ffffff;
+    @apply bg-retro-white;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #ea384c;
+    @apply bg-retro-red;
     border-radius: 2px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #c01c30;
+    @apply bg-retro-darkred;
   }
 }
 
 /* Botpress Chat Customization */
 .bp-widget-web {
   --bp-font-family: 'Courier New', monospace; /* Changed to retro font */
-  --bp-widget-background-color: #ffffff;
+  --bp-widget-background-color: #FFFFF0; /* Vanilla */
   --bp-widget-border-radius: 0.25rem;
-  --bp-widget-border-color: #ea384c;
-  --bp-widget-primary-color: #ea384c;
-  --bp-widget-secondary-color: #333333;
+  --bp-widget-border-color: #A52A2A; /* Auburn */
+  --bp-widget-primary-color: #A52A2A; /* Auburn */
+  --bp-widget-secondary-color: #2F4F4F; /* Dark slate gray */
   
   /* Chat bubbles */
-  --bp-chat-message-bot-background-color: #ea384c;
-  --bp-chat-message-user-background-color: #333333;
-  --bp-chat-message-text-color: #ffffff;
+  --bp-chat-message-bot-background-color: #A52A2A; /* Auburn */
+  --bp-chat-message-user-background-color: #2F4F4F; /* Dark slate gray */
+  --bp-chat-message-text-color: #FFFFF0; /* Vanilla */
   
   /* Input box */
-  --bp-chat-composer-background-color: #ffffff;
-  --bp-chat-composer-text-color: #333333;
-  --bp-chat-composer-border-color: #ea384c;
+  --bp-chat-composer-background-color: #FFFFF0; /* Vanilla */
+  --bp-chat-composer-text-color: #2F4F4F; /* Dark slate gray */
+  --bp-chat-composer-border-color: #A52A2A; /* Auburn */
   
   /* Button colors */
-  --bp-button-primary-background-color: #ea384c;
-  --bp-button-primary-text-color: #fff;
-  --bp-button-secondary-background-color: #333333;
-  --bp-button-secondary-text-color: #ffffff;
+  --bp-button-primary-background-color: #A52A2A; /* Auburn */
+  --bp-button-primary-text-color: #FFFFF0; /* Vanilla */
+  --bp-button-secondary-background-color: #F5D04F; /* Hunyadi yellow */
+  --bp-button-secondary-text-color: #2F4F4F; /* Dark slate gray */
   
   /* Header */
-  --bp-header-background-color: #ea384c;
-  --bp-header-text-color: #ffffff;
+  --bp-header-background-color: #A52A2A; /* Auburn */
+  --bp-header-text-color: #FFFFF0; /* Vanilla */
 }
 
 .bp-widget-widget {
@@ -123,14 +123,64 @@
   }
   
   .retro-button {
-    @apply bg-retro-red text-white border-2 border-retro-darkred rounded-sm font-bold uppercase tracking-wider hover:bg-retro-darkred transition-colors;
+    @apply bg-retro-red text-retro-white border-2 border-retro-darkred rounded-sm font-bold uppercase tracking-wider hover:bg-retro-darkred transition-colors;
   }
   
   .retro-card {
-    @apply bg-white border-2 border-retro-red rounded-sm shadow-md hover:shadow-lg transition-all;
+    @apply bg-retro-white border-2 border-retro-red rounded-sm shadow-md hover:shadow-lg transition-all;
   }
   
   .retro-input {
-    @apply bg-white border-2 border-retro-gray rounded-sm focus:border-retro-red outline-none;
+    @apply bg-retro-white border-2 border-retro-gray rounded-sm focus:border-retro-red outline-none;
   }
+
+  /* New guidance feature styles */
+  .tooltip-container {
+    @apply relative inline-block;
+  }
+
+  .tooltip {
+    @apply invisible absolute z-50 p-2 bg-retro-gray text-retro-white text-sm rounded-sm opacity-0 transition-opacity duration-300;
+    width: max-content;
+    max-width: 250px;
+  }
+
+  .tooltip-container:hover .tooltip {
+    @apply visible opacity-100;
+  }
+
+  .onboarding-overlay {
+    @apply fixed inset-0 bg-retro-gray bg-opacity-70 z-50 flex items-center justify-center;
+  }
+
+  .onboarding-card {
+    @apply bg-retro-white p-6 rounded-sm border-4 border-retro-red max-w-md w-full;
+  }
+  
+  .theme-selector {
+    @apply flex gap-2 p-2;
+  }
+  
+  .theme-option {
+    @apply w-8 h-8 rounded-full border-2 cursor-pointer transition-transform hover:scale-110;
+  }
+  
+  .theme-option.active {
+    @apply ring-4 ring-retro-yellow;
+  }
+}
+
+/* Add new animations for interactive elements */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.animate-bounce-slow {
+  animation: bounce 2s ease-in-out infinite;
+}
+
+/* Glass effect for cards */
+.glass-card {
+  @apply bg-opacity-20 backdrop-blur-lg border border-white/20;
 }

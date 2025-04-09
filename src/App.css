@@ -13,10 +13,10 @@
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #ea384caa);
+  filter: drop-shadow(0 0 2em #A52A2Aaa);
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #ea384caa);
+  filter: drop-shadow(0 0 2em #A52A2Aaa);
 }
 
 @keyframes logo-spin {
@@ -36,36 +36,122 @@
 
 .card {
   padding: 2em;
-  border: 2px solid #ea384c;
+  border: 2px solid #A52A2A;
   border-radius: 0.25rem;
 }
 
 .read-the-docs {
-  color: #ea384c;
+  color: #A52A2A;
 }
 
 /* Retro design elements */
 .retro-stripe {
   background: repeating-linear-gradient(
     45deg,
-    #ea384c,
-    #ea384c 10px,
-    #ffffff 10px,
-    #ffffff 20px
+    #A52A2A,
+    #A52A2A 10px,
+    #FFFFF0 10px,
+    #FFFFF0 20px
   );
   height: 8px;
 }
 
 .retro-shadow {
-  box-shadow: 5px 5px 0px #ea384c;
+  box-shadow: 5px 5px 0px #A52A2A;
 }
 
 .retro-border {
-  border: 2px solid #ea384c;
+  border: 2px solid #A52A2A;
   border-radius: 0.25rem;
 }
 
 .retro-dot-pattern {
-  background-image: radial-gradient(#ea384c 1px, transparent 1px);
+  background-image: radial-gradient(#A52A2A 1px, transparent 1px);
   background-size: 10px 10px;
+}
+
+/* New retro elements */
+.yellow-accent {
+  background-color: #F5D04F;
+}
+
+.retro-diagonal-pattern {
+  background: linear-gradient(
+    135deg,
+    #FFFFF0 25%,
+    #F5D04F 25%,
+    #F5D04F 50%,
+    #FFFFF0 50%,
+    #FFFFF0 75%,
+    #F5D04F 75%,
+    #F5D04F 100%
+  );
+  background-size: 20px 20px;
+}
+
+.retro-zigzag {
+  background: linear-gradient(135deg, #A52A2A 25%, transparent 25%) -10px 0,
+              linear-gradient(225deg, #A52A2A 25%, transparent 25%) -10px 0,
+              linear-gradient(315deg, #A52A2A 25%, transparent 25%),
+              linear-gradient(45deg, #A52A2A 25%, transparent 25%);
+  background-size: 20px 20px;
+  background-color: #F5D04F;
+}
+
+.retro-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  background-color: #F5D04F;
+  color: #2F4F4F;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 2px solid #A52A2A;
+  transform: rotate(-2deg);
+  font-family: 'Courier New', monospace;
+}
+
+.retro-button-3d {
+  background-color: #A52A2A;
+  color: #FFFFF0;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  transition: all 0.1s ease;
+  box-shadow: 0 6px 0 #7A1F1F;
+  font-family: 'Courier New', monospace;
+}
+
+.retro-button-3d:hover {
+  top: 2px;
+  box-shadow: 0 4px 0 #7A1F1F;
+}
+
+.retro-button-3d:active {
+  top: 6px;
+  box-shadow: 0 0 0 #7A1F1F;
+}
+
+/* Guidance elements */
+.tooltip-trigger {
+  cursor: help;
+  border-bottom: 1px dashed #A52A2A;
+}
+
+.help-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #F5D04F;
+  color: #2F4F4F;
+  font-size: 12px;
+  font-weight: bold;
+  margin-left: 4px;
+  cursor: help;
 }
