@@ -16,3 +16,8 @@ declare global {
 export interface BotpressChatProps {
   showWidget?: boolean;
 }
+
+export interface ConversationStarter {
+  id?: number;
+  text: string;
+}
