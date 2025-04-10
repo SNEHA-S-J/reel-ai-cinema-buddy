@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -21,7 +20,7 @@ export const useBotpress = (showWidget = true) => {
       return;
     }
 
-    // Load the Botpress webchat script
+    // Load the Botpress webchat script with the correct URL
     const script = document.createElement('script');
     script.id = 'botpressScript';
     script.src = "https://cdn.botpress.cloud/webchat/v2.3/inject.js";
@@ -56,25 +55,14 @@ export const useBotpress = (showWidget = true) => {
       try {
         console.log("Initializing Botpress webchat");
         
-        // Configure and initialize the bot
+        // Configure and initialize the bot using the shareable URL configuration
         window.botpressWebChat.init({
-          composerPlaceholder: "Ask Reel-AI about movies...",
-          botConversationDescription: "Your personal movie recommendation assistant",
-          botId: "NT36MHXW",
+          configUrl: "https://files.bpcontent.cloud/2025/04/06/16/20250406164749-NT36MHXW.json",
           hostUrl: "https://cdn.botpress.cloud/webchat/v2.3",
           messagingUrl: "https://messaging.botpress.cloud",
-          clientId: "NT36MHXW",
-          botName: "Reel-AI Assistant",
-          useSessionStorage: true,
-          enableConversationDeletion: true,
+          botId: "NT36MHXW",
           hideWidget: true,  // We'll control widget visibility ourselves
-          disableAnimations: false,
-          closeOnEscape: false,
-          showPoweredBy: false,
-          className: "retro-botpress-webchat",
-          containerWidth: "380px",
-          layoutWidth: "380px",
-          safetyBehaviors: true
+          className: "retro-botpress-webchat"
         });
         
         console.log("Botpress initialization complete");
@@ -93,20 +81,6 @@ export const useBotpress = (showWidget = true) => {
             });
           }
         });
-
-        // Add a slight delay to make sure the widget is properly loaded
-        setTimeout(() => {
-          if (window.botpressWebChat) {
-            console.log("Sending welcome message");
-            window.botpressWebChat.sendEvent({
-              type: 'message',
-              payload: {
-                type: 'text',
-                text: 'Hello! I\'m Reel-AI, your movie recommendation assistant. How can I help you discover your next favorite film?'
-              }
-            });
-          }
-        }, 2000);
 
       } catch (error) {
         console.error("Error initializing Botpress webchat:", error);
