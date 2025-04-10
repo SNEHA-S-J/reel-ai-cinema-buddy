@@ -1,14 +1,16 @@
 
-export interface BotpressWindow extends Window {
-  botpressWebChat?: {
-    init: (config: any) => void;
-    sendEvent: (event: any) => void;
-    onEvent: (event: string, handler: (payload: any) => void) => void;
-  };
+// Defining the interface for Botpress WebChat
+export interface BotpressWebChat {
+  init: (config: any) => void;
+  sendEvent: (event: any) => void;
+  onEvent: (event: string, handler: (payload: any) => void) => void;
 }
 
+// Extending the Window interface
 declare global {
-  interface Window extends BotpressWindow {}
+  interface Window {
+    botpressWebChat?: BotpressWebChat;
+  }
 }
 
 export interface BotpressChatProps {

@@ -1,5 +1,7 @@
 
-export const conversationStarters = [
+import { ConversationStarter } from "@/types/botpress";
+
+export const conversationStarters: string[] = [
   "What movies would you recommend for a rainy day?",
   "Show me some classic sci-fi films",
   "I'm in the mood for a good comedy",
