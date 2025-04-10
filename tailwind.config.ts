@@ -71,14 +71,14 @@ export default {
 					text: '#FFFFF0' // Vanilla for text
 				},
 				retro: {
-					white: '#FFFFF0', // Vanilla
-					cream: '#FFF5E4',
+					white: 'var(--retro-white)',
+					cream: 'var(--retro-cream)',
 					lightred: '#EDB5B5',
-					red: '#A52A2A', // Auburn
-					darkred: '#7A1F1F', // Darker Auburn
-					gray: '#2F4F4F', // Dark slate gray
-					yellow: '#F5D04F', // Hunyadi yellow
-					lightgray: '#E8E8E0' // Light vanilla-gray
+					red: 'var(--retro-red)',
+					darkred: 'var(--retro-darkred)',
+					gray: 'var(--retro-gray)',
+					yellow: 'var(--retro-yellow)',
+					lightgray: 'var(--retro-lightgray)'
 				}
 			},
 			borderRadius: {

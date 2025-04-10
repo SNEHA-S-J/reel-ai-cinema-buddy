@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Bot, MessageSquare, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -22,6 +22,8 @@ const BotpressChat = ({ showWidget = true }: BotpressChatProps) => {
   const [scriptLoaded, setScriptLoaded] = useState(false);
   const [minimized, setMinimized] = useState(true);
   const [unreadCount, setUnreadCount] = useState(0);
+  const [initialized, setInitialized] = useState(false);
+  const botInitialized = useRef(false);
   const { toast } = useToast();
 
   // List of movie-related conversation starters
@@ -36,17 +38,26 @@ const BotpressChat = ({ showWidget = true }: BotpressChatProps) => {
     "What's a good family movie to watch?"
   ];
 
+  // Load Botpress script
   useEffect(() => {
     if (!showWidget) return;
+    
+    const existingScript = document.getElementById('botpressScript');
+    if (existingScript) {
+      console.log('Botpress script already loaded');
+      setScriptLoaded(true);
+      return;
+    }
 
     // Load the Botpress webchat script
     const script = document.createElement('script');
+    script.id = 'botpressScript';
     script.src = "https://cdn.botpress.cloud/webchat/v2.3/inject.js";
     script.async = true;
     
     // Handle script loading completion
     script.onload = () => {
-      console.log("Botpress script loaded");
+      console.log("Botpress script loaded successfully");
       setScriptLoaded(true);
     };
     
@@ -61,24 +72,19 @@ const BotpressChat = ({ showWidget = true }: BotpressChatProps) => {
     
     document.body.appendChild(script);
 
-    // Cleanup function to remove the script when component unmounts
+    // Cleanup function
     return () => {
-      if (window.botpressWebChat) {
-        try {
-          window.botpressWebChat.sendEvent({ type: "hide" });
-        } catch (error) {
-          console.error("Error hiding Botpress chat:", error);
-        }
-      }
-      document.body.removeChild(script);
+      // We don't remove the script on unmount to prevent reloading issues
     };
   }, [showWidget, toast]);
 
   // Initialize webchat once script is loaded
   useEffect(() => {
-    if (scriptLoaded && window.botpressWebChat && showWidget) {
+    if (scriptLoaded && window.botpressWebChat && showWidget && !botInitialized.current) {
       try {
         console.log("Initializing Botpress webchat");
+        
+        // Configure and initialize the bot
         window.botpressWebChat.init({
           composerPlaceholder: "Ask Reel-AI about movies...",
           botConversationDescription: "Your personal movie recommendation assistant",
@@ -88,19 +94,24 @@ const BotpressChat = ({ showWidget = true }: BotpressChatProps) => {
           clientId: "NT36MHXW",
           botName: "Reel-AI Assistant",
           useSessionStorage: true,
-          stylesheet: "https://files.bpcontent.cloud/2025/04/06/16/20250406164749-NT36MHXW.json",
           enableConversationDeletion: true,
           hideWidget: true,  // We'll control widget visibility ourselves
           disableAnimations: false,
           closeOnEscape: false,
           showPoweredBy: false,
           className: "retro-botpress-webchat",
-          containerWidth: "100%",
-          layoutWidth: "100%",
+          containerWidth: "380px",
+          layoutWidth: "380px",
+          safetyBehaviors: true
         });
+        
+        console.log("Botpress initialization complete");
+        botInitialized.current = true;
+        setInitialized(true);
 
         // Set up event listeners
         window.botpressWebChat.onEvent('message', (payload) => {
+          console.log("Botpress message received:", payload);
           if (minimized && payload.direction === 'incoming') {
             setUnreadCount(prev => prev + 1);
             toast({
@@ -113,14 +124,17 @@ const BotpressChat = ({ showWidget = true }: BotpressChatProps) => {
 
         // Add a slight delay to make sure the widget is properly loaded
         setTimeout(() => {
-          window.botpressWebChat?.sendEvent({
-            type: 'message',
-            payload: {
-              type: 'text',
-              text: 'Hello! I\'m Reel-AI, your movie recommendation assistant. How can I help you discover your next favorite film?'
-            }
-          });
-        }, 1000);
+          if (window.botpressWebChat) {
+            console.log("Sending welcome message");
+            window.botpressWebChat.sendEvent({
+              type: 'message',
+              payload: {
+                type: 'text',
+                text: 'Hello! I\'m Reel-AI, your movie recommendation assistant. How can I help you discover your next favorite film?'
+              }
+            });
+          }
+        }, 2000);
 
       } catch (error) {
         console.error("Error initializing Botpress webchat:", error);
@@ -134,33 +148,68 @@ const BotpressChat = ({ showWidget = true }: BotpressChatProps) => {
   }, [scriptLoaded, showWidget, toast, minimized]);
 
   const toggleChat = () => {
-    if (window.botpressWebChat) {
-      if (minimized) {
-        window.botpressWebChat.sendEvent({ type: "show" });
-        setUnreadCount(0);
-      } else {
-        window.botpressWebChat.sendEvent({ type: "hide" });
+    if (window.botpressWebChat && initialized) {
+      try {
+        if (minimized) {
+          console.log("Showing Botpress chat");
+          window.botpressWebChat.sendEvent({ type: "show" });
+          setUnreadCount(0);
+        } else {
+          console.log("Hiding Botpress chat");
+          window.botpressWebChat.sendEvent({ type: "hide" });
+        }
+        setMinimized(!minimized);
+      } catch (error) {
+        console.error("Error toggling chat:", error);
+        toast({
+          title: "AI Assistant Error",
+          description: "There was an error with the chat. Please refresh the page.",
+          variant: "destructive"
+        });
       }
-      setMinimized(!minimized);
+    } else {
+      console.warn("Botpress not initialized yet");
+      toast({
+        title: "AI Assistant Loading",
+        description: "Please wait while the assistant initializes...",
+      });
     }
   };
 
   const sendMessage = (message: string) => {
-    if (window.botpressWebChat) {
-      window.botpressWebChat.sendEvent({
-        type: 'show'
-      });
-      setMinimized(false);
-      
-      setTimeout(() => {
-        window.botpressWebChat?.sendEvent({
-          type: 'message',
-          payload: {
-            type: 'text',
-            text: message
-          }
+    if (window.botpressWebChat && initialized) {
+      try {
+        console.log("Sending message to Botpress:", message);
+        window.botpressWebChat.sendEvent({
+          type: 'show'
         });
-      }, 300);
+        setMinimized(false);
+        
+        setTimeout(() => {
+          if (window.botpressWebChat) {
+            window.botpressWebChat.sendEvent({
+              type: 'message',
+              payload: {
+                type: 'text',
+                text: message
+              }
+            });
+          }
+        }, 300);
+      } catch (error) {
+        console.error("Error sending message to Botpress:", error);
+        toast({
+          title: "Message Error",
+          description: "Could not send your message. Please try again.",
+          variant: "destructive"
+        });
+      }
+    } else {
+      console.warn("Cannot send message: Botpress not initialized");
+      toast({
+        title: "AI Assistant Loading",
+        description: "Please wait while the assistant initializes...",
+      });
     }
   };
 

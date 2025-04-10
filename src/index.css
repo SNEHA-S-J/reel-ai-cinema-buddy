@@ -5,6 +5,14 @@
 
 @layer base {
   :root {
+    --retro-red: #A52A2A;
+    --retro-yellow: #F5D04F;
+    --retro-gray: #2F4F4F;
+    --retro-white: #FFFFF0;
+    --retro-darkred: #7A1F1F;
+    --retro-cream: #FFF5E4;
+    --retro-lightgray: #E8E8E0;
+    
     --background: 60 30% 96%; /* Light vanilla background */
     --foreground: 195 39% 25%; /* Dark slate gray text */
 
@@ -44,6 +52,11 @@
     --sidebar-border: 195 30% 30%; /* Darker slate gray */
     --sidebar-ring: 0 60% 40%; /* Auburn */
   }
+  
+  .dark-theme {
+    --retro-gray: var(--retro-white);
+    --retro-white: var(--retro-gray);
+  }
 }
 
 @layer base {
@@ -52,7 +65,8 @@
   }
 
   body {
-    @apply bg-retro-white text-retro-gray;
+    background-color: var(--retro-white);
+    color: var(--retro-gray);
     font-feature-settings: "rlig" 1, "calt" 1;
     font-family: 'Courier New', monospace; /* Retro font */
   }
@@ -63,47 +77,47 @@
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-retro-white;
+    background-color: var(--retro-white);
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-retro-red;
+    background-color: var(--retro-red);
     border-radius: 2px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-retro-darkred;
+    background-color: var(--retro-darkred);
   }
 }
 
 /* Botpress Chat Customization */
 .bp-widget-web {
   --bp-font-family: 'Courier New', monospace; /* Changed to retro font */
-  --bp-widget-background-color: #FFFFF0; /* Vanilla */
+  --bp-widget-background-color: var(--retro-white) !important; 
   --bp-widget-border-radius: 0.25rem;
-  --bp-widget-border-color: #A52A2A; /* Auburn */
-  --bp-widget-primary-color: #A52A2A; /* Auburn */
-  --bp-widget-secondary-color: #2F4F4F; /* Dark slate gray */
+  --bp-widget-border-color: var(--retro-red) !important; 
+  --bp-widget-primary-color: var(--retro-red) !important; 
+  --bp-widget-secondary-color: var(--retro-gray) !important; 
   
   /* Chat bubbles */
-  --bp-chat-message-bot-background-color: #A52A2A; /* Auburn */
-  --bp-chat-message-user-background-color: #2F4F4F; /* Dark slate gray */
-  --bp-chat-message-text-color: #FFFFF0; /* Vanilla */
+  --bp-chat-message-bot-background-color: var(--retro-red) !important; 
+  --bp-chat-message-user-background-color: var(--retro-gray) !important; 
+  --bp-chat-message-text-color: var(--retro-white) !important; 
   
   /* Input box */
-  --bp-chat-composer-background-color: #FFFFF0; /* Vanilla */
-  --bp-chat-composer-text-color: #2F4F4F; /* Dark slate gray */
-  --bp-chat-composer-border-color: #A52A2A; /* Auburn */
+  --bp-chat-composer-background-color: var(--retro-white) !important; 
+  --bp-chat-composer-text-color: var(--retro-gray) !important; 
+  --bp-chat-composer-border-color: var(--retro-red) !important; 
   
   /* Button colors */
-  --bp-button-primary-background-color: #A52A2A; /* Auburn */
-  --bp-button-primary-text-color: #FFFFF0; /* Vanilla */
-  --bp-button-secondary-background-color: #F5D04F; /* Hunyadi yellow */
-  --bp-button-secondary-text-color: #2F4F4F; /* Dark slate gray */
+  --bp-button-primary-background-color: var(--retro-red) !important; 
+  --bp-button-primary-text-color: var(--retro-white) !important; 
+  --bp-button-secondary-background-color: var(--retro-yellow) !important; 
+  --bp-button-secondary-text-color: var(--retro-gray) !important; 
   
   /* Header */
-  --bp-header-background-color: #A52A2A; /* Auburn */
-  --bp-header-text-color: #FFFFF0; /* Vanilla */
+  --bp-header-background-color: var(--retro-red) !important; 
+  --bp-header-text-color: var(--retro-white) !important; 
 }
 
 .bp-widget-widget {

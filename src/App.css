@@ -13,10 +13,10 @@
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #A52A2Aaa);
+  filter: drop-shadow(0 0 2em var(--retro-red));
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #A52A2Aaa);
+  filter: drop-shadow(0 0 2em var(--retro-red));
 }
 
 @keyframes logo-spin {
@@ -36,84 +36,84 @@
 
 .card {
   padding: 2em;
-  border: 2px solid #A52A2A;
+  border: 2px solid var(--retro-red);
   border-radius: 0.25rem;
 }
 
 .read-the-docs {
-  color: #A52A2A;
+  color: var(--retro-red);
 }
 
 /* Retro design elements */
 .retro-stripe {
   background: repeating-linear-gradient(
     45deg,
-    #A52A2A,
-    #A52A2A 10px,
-    #FFFFF0 10px,
-    #FFFFF0 20px
+    var(--retro-red),
+    var(--retro-red) 10px,
+    var(--retro-white) 10px,
+    var(--retro-white) 20px
   );
   height: 8px;
 }
 
 .retro-shadow {
-  box-shadow: 5px 5px 0px #A52A2A;
+  box-shadow: 5px 5px 0px var(--retro-red);
 }
 
 .retro-border {
-  border: 2px solid #A52A2A;
+  border: 2px solid var(--retro-red);
   border-radius: 0.25rem;
 }
 
 .retro-dot-pattern {
-  background-image: radial-gradient(#A52A2A 1px, transparent 1px);
+  background-image: radial-gradient(var(--retro-red) 1px, transparent 1px);
   background-size: 10px 10px;
 }
 
 /* New retro elements */
 .yellow-accent {
-  background-color: #F5D04F;
+  background-color: var(--retro-yellow);
 }
 
 .retro-diagonal-pattern {
   background: linear-gradient(
     135deg,
-    #FFFFF0 25%,
-    #F5D04F 25%,
-    #F5D04F 50%,
-    #FFFFF0 50%,
-    #FFFFF0 75%,
-    #F5D04F 75%,
-    #F5D04F 100%
+    var(--retro-white) 25%,
+    var(--retro-yellow) 25%,
+    var(--retro-yellow) 50%,
+    var(--retro-white) 50%,
+    var(--retro-white) 75%,
+    var(--retro-yellow) 75%,
+    var(--retro-yellow) 100%
   );
   background-size: 20px 20px;
 }
 
 .retro-zigzag {
-  background: linear-gradient(135deg, #A52A2A 25%, transparent 25%) -10px 0,
-              linear-gradient(225deg, #A52A2A 25%, transparent 25%) -10px 0,
-              linear-gradient(315deg, #A52A2A 25%, transparent 25%),
-              linear-gradient(45deg, #A52A2A 25%, transparent 25%);
+  background: linear-gradient(135deg, var(--retro-red) 25%, transparent 25%) -10px 0,
+              linear-gradient(225deg, var(--retro-red) 25%, transparent 25%) -10px 0,
+              linear-gradient(315deg, var(--retro-red) 25%, transparent 25%),
+              linear-gradient(45deg, var(--retro-red) 25%, transparent 25%);
   background-size: 20px 20px;
-  background-color: #F5D04F;
+  background-color: var(--retro-yellow);
 }
 
 .retro-badge {
   display: inline-block;
   padding: 0.25rem 0.5rem;
-  background-color: #F5D04F;
-  color: #2F4F4F;
+  background-color: var(--retro-yellow);
+  color: var(--retro-gray);
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
-  border: 2px solid #A52A2A;
+  border: 2px solid var(--retro-red);
   transform: rotate(-2deg);
   font-family: 'Courier New', monospace;
 }
 
 .retro-button-3d {
-  background-color: #A52A2A;
-  color: #FFFFF0;
+  background-color: var(--retro-red);
+  color: var(--retro-white);
   border: none;
   padding: 0.5rem 1rem;
   font-weight: bold;
@@ -121,24 +121,24 @@
   letter-spacing: 1px;
   position: relative;
   transition: all 0.1s ease;
-  box-shadow: 0 6px 0 #7A1F1F;
+  box-shadow: 0 6px 0 var(--retro-darkred);
   font-family: 'Courier New', monospace;
 }
 
 .retro-button-3d:hover {
   top: 2px;
-  box-shadow: 0 4px 0 #7A1F1F;
+  box-shadow: 0 4px 0 var(--retro-darkred);
 }
 
 .retro-button-3d:active {
   top: 6px;
-  box-shadow: 0 0 0 #7A1F1F;
+  box-shadow: 0 0 0 var(--retro-darkred);
 }
 
 /* Guidance elements */
 .tooltip-trigger {
   cursor: help;
-  border-bottom: 1px dashed #A52A2A;
+  border-bottom: 1px dashed var(--retro-red);
 }
 
 .help-icon {
@@ -148,8 +148,8 @@
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: #F5D04F;
-  color: #2F4F4F;
+  background: var(--retro-yellow);
+  color: var(--retro-gray);
   font-size: 12px;
   font-weight: bold;
   margin-left: 4px;

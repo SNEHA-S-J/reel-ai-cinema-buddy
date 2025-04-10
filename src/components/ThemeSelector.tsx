@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Palette, Check, X } from "lucide-react";
@@ -58,9 +58,48 @@ const ThemeSelector = ({ onThemeChange }: ThemeSelectorProps) => {
   const [open, setOpen] = useState(false);
   const [selectedTheme, setSelectedTheme] = useState<Theme>(THEMES[0]);
 
+  // Load theme from localStorage on component mount
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('reel-pin-theme');
+    if (savedTheme) {
+      try {
+        const theme = JSON.parse(savedTheme);
+        setSelectedTheme(theme);
+        applyTheme(theme);
+      } catch (error) {
+        console.error('Error parsing saved theme:', error);
+      }
+    }
+  }, []);
+
+  const applyTheme = (theme: Theme) => {
+    // Apply theme to CSS variables
+    document.documentElement.style.setProperty('--retro-red', theme.primaryColor);
+    document.documentElement.style.setProperty('--retro-yellow', theme.secondaryColor);
+    document.documentElement.style.setProperty('--retro-gray', theme.textColor);
+    document.documentElement.style.setProperty('--retro-white', theme.backgroundColor);
+    
+    // For darker themes, adjust some colors
+    if (theme.backgroundColor === '#121212' || theme.backgroundColor === '#1E1E1E') {
+      document.documentElement.style.setProperty('--retro-darkred', theme.primaryColor + '80');
+      document.body.classList.add('dark-theme');
+    } else {
+      document.documentElement.style.setProperty('--retro-darkred', '#7A1F1F');
+      document.body.classList.remove('dark-theme');
+    }
+  };
+
   const handleThemeSelect = (theme: Theme) => {
     setSelectedTheme(theme);
+    applyTheme(theme);
+    
+    // Save theme to localStorage
+    localStorage.setItem('reel-pin-theme', JSON.stringify(theme));
+    
+    // Call the prop function
     onThemeChange(theme);
+    
+    setOpen(false);
   };
 
   return (
