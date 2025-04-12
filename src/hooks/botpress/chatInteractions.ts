@@ -16,7 +16,7 @@ export const useChatInteractions = (initialized: boolean) => {
         if (minimized && payload.direction === 'incoming') {
           setUnreadCount(prev => prev + 1);
           toast({
-            title: "New message from Movie-AI",
+            title: "New message from Chat Bot",
             description: payload.payload?.text?.substring(0, 60) + (payload.payload?.text?.length > 60 ? "..." : ""),
             duration: 5000,
           });
@@ -40,7 +40,7 @@ export const useChatInteractions = (initialized: boolean) => {
       } catch (error) {
         console.error("Error toggling chat:", error);
         toast({
-          title: "AI Assistant Error",
+          title: "Chat Bot Error",
           description: "There was an error with the chat. Please refresh the page.",
           variant: "destructive"
         });
@@ -48,8 +48,8 @@ export const useChatInteractions = (initialized: boolean) => {
     } else {
       console.warn("Botpress not initialized yet");
       toast({
-        title: "AI Assistant Loading",
-        description: "Please wait while the assistant initializes...",
+        title: "Chat Bot Loading",
+        description: "Please wait while the chat bot initializes...",
       });
     }
   };
@@ -88,8 +88,8 @@ export const useChatInteractions = (initialized: boolean) => {
     } else {
       console.warn("Cannot send message: Botpress not initialized");
       toast({
-        title: "AI Assistant Loading",
-        description: "Please wait while the assistant initializes...",
+        title: "Chat Bot Loading",
+        description: "Please wait while the chat bot initializes...",
       });
     }
   };
@@ -129,8 +129,8 @@ export const useChatInteractions = (initialized: boolean) => {
     } else {
       console.warn("Cannot ask movie question: Botpress not initialized");
       toast({
-        title: "AI Assistant Loading",
-        description: "Please wait while the assistant initializes...",
+        title: "Chat Bot Loading",
+        description: "Please wait while the chat bot initializes...",
       });
     }
   };
