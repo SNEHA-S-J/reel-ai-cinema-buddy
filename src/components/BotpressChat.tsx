@@ -1,5 +1,4 @@
-
-import { useBotpress } from "@/hooks/useBotpress";
+import { useBotpress } from "@/hooks/botpress";
 import { BotpressChatProps } from "@/types/botpress";
 import ChatButton from "./chat/ChatButton";
 import QuickSuggestions from "./chat/QuickSuggestions";
@@ -8,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { useState, useRef, useEffect } from "react";
 import { MessageCircle, Search, Send } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Textarea } from "@/components/ui/textarea";
 
 const BotpressChat = ({ showWidget = true }: BotpressChatProps) => {
@@ -33,7 +31,6 @@ const BotpressChat = ({ showWidget = true }: BotpressChatProps) => {
     }
   };
 
-  // Auto-resize textarea as user types
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
@@ -45,7 +42,6 @@ const BotpressChat = ({ showWidget = true }: BotpressChatProps) => {
 
   return (
     <>
-      {/* Custom chat trigger button */}
       <div className="fixed bottom-6 right-6 z-50">
         <ChatButton 
           minimized={minimized} 
@@ -54,7 +50,6 @@ const BotpressChat = ({ showWidget = true }: BotpressChatProps) => {
         />
       </div>
 
-      {/* Improved conversational interface when chat is minimized */}
       {minimized && initialized && (
         <div className="fixed bottom-24 right-6 z-40 w-80">
           <div className="bg-retro-white p-4 rounded-sm border-2 border-retro-red shadow-lg animate-fade-in">
