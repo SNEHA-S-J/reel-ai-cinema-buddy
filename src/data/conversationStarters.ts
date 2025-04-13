@@ -1,13 +1,10 @@
 
-import { ConversationStarter } from "@/types/botpress";
-
+// Export as simple string array for easier usage with QuickSuggestions
 export const conversationStarters: string[] = [
-  "What movies would you recommend for a rainy day?",
-  "Show me some classic sci-fi films",
-  "I'm in the mood for a good comedy",
-  "Which movies won Oscars last year?",
-  "What should I watch if I liked Inception?",
-  "Tell me about upcoming movie releases",
-  "Can you recommend a foreign film?",
-  "What's a good family movie to watch?"
+  "Tell me about The Godfather",
+  "What are some good sci-fi movies?",
+  "Who directed Inception?",
+  "Movies with Tom Hanks",
+  "What should I watch tonight?",
+  "Movies similar to Inception"
 ];
