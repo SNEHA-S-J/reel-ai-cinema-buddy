@@ -66,8 +66,7 @@ export const useBotpress = (showWidget = true) => {
             // Configure and initialize the bot using the shareable URL configuration
             window.botpressWebChat.init({
               configUrl: "https://files.bpcontent.cloud/2025/04/06/16/20250406164749-NT36MHXW.json",
-              hideWidget: true,  // We'll control widget visibility ourselves
-              stylesheet: 'body .bp-widget-web { z-index: 999; }' // Ensure proper z-index
+              hideWidget: true  // We'll control widget visibility ourselves
             });
             
             console.log("Botpress initialization complete");
@@ -80,7 +79,7 @@ export const useBotpress = (showWidget = true) => {
               if (minimized && payload.direction === 'incoming') {
                 setUnreadCount(prev => prev + 1);
                 toast({
-                  title: "New message from Movie-AI",
+                  title: "New message from Reel-AI",
                   description: payload.payload?.text?.substring(0, 60) + (payload.payload?.text?.length > 60 ? "..." : ""),
                   duration: 5000,
                 });
@@ -174,52 +173,11 @@ export const useBotpress = (showWidget = true) => {
     }
   };
 
-  const askMovieQuestion = (movieTitle: string) => {
-    if (window.botpressWebChat && initialized) {
-      try {
-        const message = `Tell me about the movie "${movieTitle}"`;
-        console.log("Asking movie question:", message);
-        
-        // Show the chat and send the question
-        window.botpressWebChat.sendEvent({
-          type: 'show'
-        });
-        setMinimized(false);
-        
-        setTimeout(() => {
-          if (window.botpressWebChat) {
-            window.botpressWebChat.sendEvent({
-              type: 'message',
-              payload: {
-                type: 'text',
-                text: message
-              }
-            });
-          }
-        }, 300);
-      } catch (error) {
-        console.error("Error asking movie question:", error);
-        toast({
-          title: "Message Error",
-          description: "Could not send your movie question. Please try again.",
-          variant: "destructive"
-        });
-      }
-    } else {
-      console.warn("Cannot ask movie question: Botpress not initialized");
-      toast({
-        title: "AI Assistant Loading",
-        description: "Please wait while the assistant initializes...",
-      });
-    }
-  };
-
   return {
     minimized,
     unreadCount,
     initialized,
     toggleChat,
-    sendMessage,
-    askMovieQuestion
+    sendMessage
   };
 };
