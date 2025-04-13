@@ -16,7 +16,7 @@ const SimpleBotButton = ({ isOpen, unreadCount, onClick }: SimpleBotButtonProps)
         !isOpen 
           ? 'bg-retro-yellow hover:bg-retro-yellow/80 text-retro-gray' 
           : 'bg-retro-gray hover:bg-retro-gray/80 text-retro-white'
-      } z-50`}
+      }`}
     >
       {!isOpen ? (
         <div className="relative">
