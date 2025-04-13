@@ -1,4 +1,3 @@
-
 import { useBotpress } from "@/hooks/botpress";
 import { BotpressChatProps } from "@/types/botpress";
 import ChatButton from "./chat/ChatButton";
@@ -52,7 +51,7 @@ const BotpressChat = ({ showWidget = true }: BotpressChatProps) => {
       </div>
 
       {minimized && initialized && (
-        <div className="fixed bottom-24 right-6 z-50 w-80">
+        <div className="fixed bottom-24 right-6 z-40 w-80">
           <div className="bg-retro-white p-4 rounded-sm border-2 border-retro-red shadow-lg animate-fade-in">
             <div className="mb-4">
               <h3 className="font-mono text-retro-red font-bold flex items-center">

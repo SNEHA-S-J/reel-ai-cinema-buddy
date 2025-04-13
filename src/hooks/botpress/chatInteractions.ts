@@ -16,7 +16,7 @@ export const useChatInteractions = (initialized: boolean) => {
         if (minimized && payload.direction === 'incoming') {
           setUnreadCount(prev => prev + 1);
           toast({
-            title: "New message from Chat Bot",
+            title: "New message from Movie-AI",
             description: payload.payload?.text?.substring(0, 60) + (payload.payload?.text?.length > 60 ? "..." : ""),
             duration: 5000,
           });
@@ -40,7 +40,7 @@ export const useChatInteractions = (initialized: boolean) => {
       } catch (error) {
         console.error("Error toggling chat:", error);
         toast({
-          title: "Chat Bot Error",
+          title: "AI Assistant Error",
           description: "There was an error with the chat. Please refresh the page.",
           variant: "destructive"
         });
@@ -48,8 +48,8 @@ export const useChatInteractions = (initialized: boolean) => {
     } else {
       console.warn("Botpress not initialized yet");
       toast({
-        title: "Chat Bot Loading",
-        description: "Please wait while the chat bot initializes...",
+        title: "AI Assistant Loading",
+        description: "Please wait while the assistant initializes...",
       });
     }
   };
@@ -88,8 +88,8 @@ export const useChatInteractions = (initialized: boolean) => {
     } else {
       console.warn("Cannot send message: Botpress not initialized");
       toast({
-        title: "Chat Bot Loading",
-        description: "Please wait while the chat bot initializes...",
+        title: "AI Assistant Loading",
+        description: "Please wait while the assistant initializes...",
       });
     }
   };
@@ -129,8 +129,8 @@ export const useChatInteractions = (initialized: boolean) => {
     } else {
       console.warn("Cannot ask movie question: Botpress not initialized");
       toast({
-        title: "Chat Bot Loading",
-        description: "Please wait while the chat bot initializes...",
+        title: "AI Assistant Loading",
+        description: "Please wait while the assistant initializes...",
       });
     }
   };
